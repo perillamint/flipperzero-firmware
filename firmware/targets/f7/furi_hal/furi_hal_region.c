@@ -70,10 +70,55 @@ const FuriHalRegion furi_hal_region_jp = {
             .duty_cycle = 50,
         }}};
 
+const FuriHalRegion furi_hal_region_kr = {
+    .country_code = "KR",
+    .bands_count = 2,
+    .bands = {
+        //{
+        //    .start = 235000000, // 시각장애인 유도신호등, 해당 기능 사용시만 주석 해제하시오`
+        //    .end = 267000000,
+        //    .power_limit = 12,
+        //    .duty_cycle = 50,
+        //},
+        //{
+        //    .start = 335400000, // 시각장애인 유도신호등, 해당 기능 사용시만 주석 해제하시오`
+        //    .end = 368500000,
+        //    .power_limit = 12,
+        //    .duty_cycle = 50,
+        //},
+        {
+            .start = 420000000, // 간이무선국, 레저무전기, 차키, 아마추어, 콜택시 무전기, 운송업무
+            .end = 460000000,
+            .power_limit = 12,
+            .duty_cycle = 50,
+        },
+        //{
+        //    .start = 460000000, // 건물 무전기
+        //    .end = 470000000,
+        //    .power_limit = 12,
+        //    .duty_cycle = 50,
+        //},
+        //{
+        //    .start = 470000000, // 방송 무선마이크
+        //    .end = 698000000,
+        //    .power_limit = 12,
+        //    .duty_cycle = 50,
+        //},
+        {
+            .start = 894000000, // 삐삐, BIS, 무선마이크(비인가)
+            .end = 942000000,
+            .power_limit = 12,
+            .duty_cycle = 50,
+        }}};
+
 static const FuriHalRegion* furi_hal_region = NULL;
 
 void furi_hal_region_init() {
     FuriHalVersionRegion region = furi_hal_version_get_hw_region();
+
+    // For now, make it Korean only
+    furi_hal_region = &furi_hal_region_kr;
+    return;
 
     if(region == FuriHalVersionRegionUnknown) {
         furi_hal_region = &furi_hal_region_zero;
